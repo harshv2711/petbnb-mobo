@@ -131,7 +131,7 @@ const sitterProfile = () => {
         </ScrollView>
 
         <View className='absolute bottom-0 left-0 right-0 px-8 py-3'>
-          <Link href="/search" asChild>
+          <Link href="./checkout" asChild>
             <TouchableOpacity className="border shadow border-black rounded-full py-4 bg-black">
               <Text className="text-white text-center text-[16px] font-semibold">
                 Book now
