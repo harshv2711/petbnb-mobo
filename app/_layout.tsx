@@ -1,11 +1,13 @@
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import "./global.css";
 
 export default function RootLayout() {
-  return(
-  <Stack>
-    < Stack.Screen name="index" options={{ headerShown: false }} />
-    < Stack.Screen name="search" options={{ headerShown: false }} />
-  </Stack>
-)
+  const router = useRouter();
+
+  return (
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false, title: "" }} />
+      <Stack.Screen name="sitterProfile" options={{ headerShown: false, title: "" }} />
+    </Stack>
+  );
 }
