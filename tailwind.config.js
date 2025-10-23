@@ -13,6 +13,9 @@ module.exports = {
       },
       colors:{
         primary:"#ff3e06",
+        themeBg:"#FFF2EF",
+        titleColor: "#253900" //green font color 
+        // primary:"#DC143C", // red with pinkish tone
       }
     },
   },

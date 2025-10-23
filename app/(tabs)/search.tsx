@@ -172,7 +172,7 @@ export default function Search() {
   }, [sitters, serviceFilter, petFilter]);
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView className="flex-1 bg-themeBg">
       <ScrollView showsVerticalScrollIndicator={false}>
 
         {/* Search box */}
