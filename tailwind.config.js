@@ -14,8 +14,9 @@ module.exports = {
       colors:{
         primary:"#ff3e06",
         themeBg:"#FFF2EF",
-        titleColor: "#253900" //green font color 
-        // primary:"#DC143C", // red with pinkish tone
+        titleColor: "#253900" //green font color final
+        // titleColor: "#1C352D" //green font color optional
+        // primary:"#DC143C", // red with pinkish tone optional
       }
     },
   },
