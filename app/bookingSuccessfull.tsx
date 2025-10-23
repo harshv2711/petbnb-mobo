@@ -83,7 +83,7 @@ export default function BookingSuccessfull() {
 
         {/* CTAs */}
         <View className="mt-6 gap-3">
-          <Link href={`/trackStatus`} asChild>
+          <Link href={`/bookingDetails`} asChild>
             <TouchableOpacity className="bg-black py-3 rounded-lg items-center">
               <Text className="text-white font-semibold">Track Status</Text>
             </TouchableOpacity>

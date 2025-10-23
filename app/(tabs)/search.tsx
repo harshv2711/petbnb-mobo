@@ -1,6 +1,6 @@
 import FeaturedSitterCard from "@/components/FeaturedSitterCard";
 import SearchResult from "@/components/searchResultCard";
-import { MapPin } from "lucide-react-native";
+import { Cat, Dog, Dumbbell, Footprints, Home, MapPin, PawPrint } from "lucide-react-native";
 import React, { useMemo, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -8,13 +8,14 @@ import "../global.css";
 
 export default function Search() {
   const [serviceFilter, setServiceFilter] = useState<"All" | "Boarding" | "Walking" | "Training">("All");
-  const [petFilter, setPetFilter] = useState<"Both" | "Dog" | "Cat">("Both");
+  const [petFilter, setPetFilter] = useState<"Dog & Cat" | "Dog" | "Cat">("Dog & Cat");
 
   const sitters = [
     {
       sitterName: "Priya Sharma",
       location: "Bandra West, Mumbai",
       services: "Boarding • Walking • Day Care",
+      petType: "Dog & Cat",
       availability: "Weekdays & Weekends",
       price: "₹700 / night",
       sitterImage: "https://randomuser.me/api/portraits/women/68.jpg",
@@ -28,6 +29,7 @@ export default function Search() {
       sitterName: "Ravi Patel",
       location: "Andheri East, Mumbai",
       services: "Walking • Training",
+      petType: "Dog",
       availability: "Weekends only",
       price: "₹500 / walk",
       sitterImage: "https://randomuser.me/api/portraits/men/32.jpg",
@@ -36,12 +38,12 @@ export default function Search() {
       rating: "4.8",
       reviews: "37",
       isSuperhost: false,
-      petTypes: ["Dog"],
     },
     {
       sitterName: "Neha Verma",
       location: "Powai, Mumbai",
       services: "Boarding • Day Care",
+      petType: "Dog & Cat",
       availability: "All days",
       price: "₹800 / night",
       sitterImage: "https://randomuser.me/api/portraits/women/45.jpg",
@@ -55,19 +57,21 @@ export default function Search() {
       sitterName: "Amit Deshmukh",
       location: "Vile Parle, Mumbai",
       services: "Walking • Day Care",
+      petType: "Dog & Cat",
       availability: "Weekdays only",
       price: "₹450 / walk",
       sitterImage: "https://randomuser.me/api/portraits/men/41.jpg",
-      coverImage: "https://a0.muscache.com/im/pictures/1bc4c49a-2fa5-41af-b3b7-9ed8e7f2b5b7.jpg?im_w=720",
+      coverImage:
+        "https://a0.muscache.com/im/pictures/1bc4c49a-2fa5-41af-b3b7-9ed8e7f2b5b7.jpg?im_w=720",
       rating: "4.7",
       reviews: "29",
       isSuperhost: false,
-      petTypes: ["Dog", "Cat"],
     },
     {
       sitterName: "Ritika Mehta",
       location: "Juhu, Mumbai",
       services: "Boarding • Grooming • Walking",
+      petType: "Dog & Cat",
       availability: "Weekends only",
       price: "₹950 / night",
       sitterImage: "https://randomuser.me/api/portraits/women/26.jpg",
@@ -81,6 +85,7 @@ export default function Search() {
       sitterName: "Karan Bhosale",
       location: "Goregaon West, Mumbai",
       services: "Training • Walking",
+      petType: "Dog",
       availability: "Evenings only",
       price: "₹600 / session",
       sitterImage: "https://randomuser.me/api/portraits/men/73.jpg",
@@ -89,12 +94,12 @@ export default function Search() {
       rating: "4.8",
       reviews: "33",
       isSuperhost: false,
-      petTypes: ["Dog"],
     },
     {
       sitterName: "Aisha Khan",
       location: "Worli, Mumbai",
       services: "Day Care • Boarding",
+      petType: "Dog & Cat",
       availability: "All days",
       price: "₹850 / night",
       sitterImage: "https://randomuser.me/api/portraits/women/54.jpg",
@@ -103,12 +108,12 @@ export default function Search() {
       rating: "5.0",
       reviews: "72",
       isSuperhost: true,
-      petTypes: ["Dog", "Cat"],
     },
     {
       sitterName: "Rohit Nair",
       location: "Kandivali East, Mumbai",
       services: "Walking • Boarding",
+      petType: "Dog & Cat",
       availability: "Morning & Evening",
       price: "₹550 / walk",
       sitterImage: "https://randomuser.me/api/portraits/men/67.jpg",
@@ -122,6 +127,7 @@ export default function Search() {
       sitterName: "Sneha Kulkarni",
       location: "Malad West, Mumbai",
       services: "Boarding • Day Care • Training",
+      petType: "Dog & Cat",
       availability: "Weekdays & Weekends",
       price: "₹900 / night",
       sitterImage: "https://randomuser.me/api/portraits/women/30.jpg",
@@ -130,12 +136,12 @@ export default function Search() {
       rating: "4.9",
       reviews: "58",
       isSuperhost: true,
-      petTypes: ["Dog", "Cat"],
     },
     {
       sitterName: "Vikram Joshi",
       location: "Thane, Mumbai",
       services: "Training • Walking",
+      petType: "Dog",
       availability: "Flexible hours",
       price: "₹700 / session",
       sitterImage: "https://randomuser.me/api/portraits/men/58.jpg",
@@ -144,68 +150,98 @@ export default function Search() {
       rating: "4.8",
       reviews: "39",
       isSuperhost: false,
-      petTypes: ["Dog"],
     },
   ];
 
-  // filter logic
+  // filter logic (fixed: petType is a string; "Both" label maps to "Dog & Cat")
   const filteredSitters = useMemo(() => {
     return sitters.filter((s) => {
+      // Service filter
       if (serviceFilter !== "All") {
         const servicesArray = s.services.split("•").map((x) => x.trim());
         if (!servicesArray.includes(serviceFilter)) return false;
       }
-      const petTypes = s.petTypes ?? ["Dog", "Cat"];
-      if (petFilter !== "Both" && !petTypes.includes(petFilter)) return false;
-      return true;
+
+      // Pet filter
+      const current = (s.petType || "Dog & Cat").toLowerCase(); // e.g., "dog & cat", "dog", "cat"
+      if (petFilter === "Dog & Cat") return true;
+      if (petFilter === "Dog" && current.includes("dog")) return true;
+      if (petFilter === "Cat" && current.includes("cat")) return true;
+      return false;
     });
   }, [sitters, serviceFilter, petFilter]);
 
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* search filter toggle btn  */}
-        <View className="border-b pb-4 border-gray-300">
-          <View className="px-6 mt-2">
-            <View className="border border-gray-300 bg-white rounded-[6px] p-3 flex-row items-center overflow-hidden">
-              {/* <SearchIcon size={20} color="#9CA3AF" /> */}
-              <MapPin size={20} color="#9CA3AF" />
-              <Text numberOfLines={1} ellipsizeMode="tail" className="text-[16px] text-gray-400 ml-2">
-                Search by area or city
-              </Text>
+
+        {/* Search box */}
+        <View>
+          {/* location  */}
+          <View className="border-b border-gray-300 pb-4 flex-row items-center mt-3">
+            <View className="pl-6 pr-3 flex-1">
+              <View className="flex-row items-center p-3 rounded-[6px] bg-black/5 border border-gray-300 overflow-hidden">
+                <MapPin size={20} color="#9CA3AF" />
+                <Text
+                  numberOfLines={1}
+                  ellipsizeMode="tail"
+                  className="ml-2 text-[16px] text-gray-400"
+                >
+                  Search by area or city
+                </Text>
+              </View>
             </View>
+            <TouchableOpacity
+              onPress={() => { setServiceFilter("Boarding"); setPetFilter("Dog & Cat") }}
+              className="h-11 mr-6 border rounded-full border-gray-300 py-0 px-4 flex-col justify-center items-center"
+            >
+              <Text className="text-[14px] text-center m-0 p-0">Clear</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Service Filters */}
+          <View className="px-6 flex-row gap-2 mt-2">
+            {[
+              { type: "Boarding", icon: Home },
+              { type: "Walking", icon: Footprints },
+              { type: "Training", icon: Dumbbell },
+            ].map(({ type, icon: Icon }) => (
+              <TouchableOpacity
+                key={type}
+                className={`flex-1 border px-3 py-2 rounded border-gray-300 ${serviceFilter === type ? "bg-gray-200" : ""
+                  }`}
+                onPress={() => setServiceFilter(type as any)}
+              >
+                <View className="flex-row justify-center items-center gap-1">
+                  <Icon size={16} color="#000" />
+                  <Text className="text-center">{type}</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </View>
+
+          {/* Pet Filters (label 'Both' maps to value 'Dog & Cat') */}
+          <View className="px-6 flex-row gap-2 mt-2 mb-4">
+            {[
+              { label: "Dog", value: "Dog", icon: Dog },
+              { label: "Cat", value: "Cat", icon: Cat },
+              { label: "Both", value: "Dog & Cat", icon: PawPrint },
+            ].map(({ label, value, icon: Icon }) => (
+              <TouchableOpacity
+                key={label}
+                className={`flex-1 border px-3 py-2 rounded border-gray-300 ${petFilter === (value as any) ? "bg-gray-200" : ""
+                  }`}
+                onPress={() => setPetFilter(value as any)}
+              >
+                <View className="flex-row justify-center items-center gap-1">
+                  <Icon size={16} color="#000" />
+                  <Text className="text-center">{label}</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
           </View>
         </View>
 
-        {/* Service Filters */}
-        <View className="px-6 flex-row gap-2 mt-2">
-          {["Boarding", "Walking", "Training"].map((type) => (
-            <TouchableOpacity
-              key={type}
-              className={`flex-1 border px-3 py-2 rounded border-gray-300 ${
-                serviceFilter === type ? "bg-gray-200" : ""
-              }`}
-              onPress={() => setServiceFilter(type as any)}
-            >
-              <Text className="text-center">{type}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-
-        {/* Pet Filters */}
-        <View className="px-6 flex-row gap-2 mt-2 mb-4">
-          {["Dog", "Cat", "Both"].map((type) => (
-            <TouchableOpacity
-              key={type}
-              className={`flex-1 border px-3 py-2 rounded border-gray-300 ${
-                petFilter === type ? "bg-gray-200" : ""
-              }`}
-              onPress={() => setPetFilter(type as any)}
-            >
-              <Text className="text-center">{type}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
 
         {/* Search Results */}
         <View>

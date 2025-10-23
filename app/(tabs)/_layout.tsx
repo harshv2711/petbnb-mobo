@@ -30,7 +30,8 @@ export default function TabsLayout(){
           focused={focused}
           iconUrl="https://img.icons8.com/fluency-systems-regular/48/home--v1.png"
         />
-      ) }}></Tabs.Screen>
+      ) }}>
+      </Tabs.Screen>
       <Tabs.Screen 
         name="search" 
         options={
@@ -46,6 +47,7 @@ export default function TabsLayout(){
           }
         }>
       </Tabs.Screen>
+
       <Tabs.Screen 
         name="bookings" 
         options={
@@ -61,26 +63,12 @@ export default function TabsLayout(){
           }
         }>
       </Tabs.Screen>
+
       <Tabs.Screen 
         name="userProfile" 
         options={
           {
-            title:"Accounts", 
-            headerShown: false,
-            tabBarIcon:({focused})=>(
-              <TabIcon 
-                focused={focused}
-                iconUrl="https://img.icons8.com/ios-glyphs/30/user--v1.png"
-              />
-            ) 
-          }
-        }>
-      </Tabs.Screen>
-      <Tabs.Screen 
-        name="searchResultScreen" 
-        options={
-          {
-            title:"Accounts", 
+            title:"Manage Account", 
             headerShown: false,
             tabBarIcon:({focused})=>(
               <TabIcon 

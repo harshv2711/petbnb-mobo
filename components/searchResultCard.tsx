@@ -6,6 +6,7 @@ interface SearchResultCardProps {
   sitterName: string;
   location: string;
   services: string;
+  petType: string;
   availability: string;
   price: string;
   sitterImage: string;
@@ -19,6 +20,7 @@ export default function searchResultCard({
   sitterName,
   location,
   services,
+  petType,
   availability,
   price,
   sitterImage,
@@ -59,6 +61,9 @@ export default function searchResultCard({
               </Text>
               <Text className="text-[15px] font-medium text-gray-700 leading-[22px]">
                 {services}
+              </Text>
+              <Text className="text-[15px] font-medium text-gray-700 leading-[22px]">
+                {petType}
               </Text>
               <Text className="text-[15px] text-gray-600 font-medium leading-[22px]">
                 Availability: {availability}

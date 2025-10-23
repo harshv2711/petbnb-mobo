@@ -12,6 +12,7 @@ export default function RootLayout() {
       <Stack.Screen name="checkoutComplete" options={{ headerShown: false, title: "" }} />
       <Stack.Screen name="bookingSuccessfull" options={{ headerShown: false, title: "" }} />
       <Stack.Screen name="trackStatus" options={{ headerShown: false, title: "" }} />
+      <Stack.Screen name="bookingDetails" options={{ headerShown: false, title: "" }} />
     </Stack>
   );
 }
