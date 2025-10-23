@@ -1,8 +1,32 @@
-import { Link } from 'expo-router'
-import React from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View, } from 'react-native'
+import { Link } from 'expo-router';
+import React from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View, } from 'react-native';
 
-export default function SearchResult() {
+interface SearchResultCardProps {
+  sitterName: string;
+  location: string;
+  services: string;
+  availability: string;
+  price: string;
+  sitterImage: string;
+  coverImage: string;
+  rating?: string;
+  reviews?: string;
+  isSuperhost?: boolean;
+}
+
+export default function searchResultCard({
+  sitterName,
+  location,
+  services,
+  availability,
+  price,
+  sitterImage,
+  coverImage,
+  rating = "4.9",
+  reviews = "52",
+  isSuperhost = true,
+}: SearchResultCardProps) {
   return (
     <View className="">
       {/* Search Result Card */}
@@ -10,7 +34,7 @@ export default function SearchResult() {
         {/* Main Image */}
         <Image
           source={{
-            uri: "https://a0.muscache.com/im/pictures/2a466bb0-5738-47d1-b42b-345da9dadd3a.jpg?im_w=960",
+            uri: coverImage,
           }}
           className="w-full h-[400px]"
           resizeMode="cover"
@@ -22,7 +46,7 @@ export default function SearchResult() {
             {/* Left Column: Avatar */}
             <Image
               source={{
-                uri: "https://randomuser.me/api/portraits/women/68.jpg",
+                uri: sitterImage,
               }}
               className="w-[50px] h-[50px] rounded-full"
             />
@@ -30,16 +54,17 @@ export default function SearchResult() {
             {/* Right Column: Info */}
             <View className="flex-1 gap-[1px]">
               <Text className="text-[18px] font-semibold text-black leading-[24px] mb-1">
-                Andy-Kevin in Paris is a Superhost
+                {sitterName} in {location} 
+                {/* is a Superhost */}
               </Text>
               <Text className="text-[15px] font-medium text-gray-700 leading-[22px]">
-                Boarding • Walking • Day Care
+                {services}
               </Text>
               <Text className="text-[15px] text-gray-600 font-medium leading-[22px]">
-                Availability: Weekdays & Weekends
+                Availability: {availability}
               </Text>
               <Text className="text-[15px] font-medium text-gray-600 leading-[22px]">
-                Starting Price: ₹700 / night
+                {price}
               </Text>
             </View>
           </View>

@@ -76,6 +76,21 @@ export default function TabsLayout(){
           }
         }>
       </Tabs.Screen>
+      <Tabs.Screen 
+        name="searchResultScreen" 
+        options={
+          {
+            title:"Accounts", 
+            headerShown: false,
+            tabBarIcon:({focused})=>(
+              <TabIcon 
+                focused={focused}
+                iconUrl="https://img.icons8.com/ios-glyphs/30/user--v1.png"
+              />
+            ) 
+          }
+        }>
+      </Tabs.Screen>
     </Tabs>
   )
 }
