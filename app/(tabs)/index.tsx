@@ -1,6 +1,6 @@
 import { Link } from "expo-router"; // ✅ Correct import
 import React from "react";
-import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import "../global.css";
 
@@ -13,7 +13,7 @@ export default function Index() {
             <Text className="font-primary-bold text-[16px] font-bold text-titleColor leading-[36px] mb-3">
               PetBnb
             </Text>
-            <Text className="font-primary-bold text-[32px] font-bold text-titleColor leading-[36px] mb-3">
+            <Text className="font-primaryBold text-[32px] font-bold text-titleColor leading-[36px] mb-3">
               Find a loving home when you're away.
             </Text>
             <Text className="text-[14px] text-gray-700 leading-[18px]">
@@ -41,7 +41,6 @@ export default function Index() {
             </Link>
           </View>
         </View>
-
     </SafeAreaView>
   );
 }

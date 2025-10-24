@@ -172,7 +172,7 @@ export default function Search() {
   }, [sitters, serviceFilter, petFilter]);
 
   return (
-    <SafeAreaView className="flex-1 bg-themeBg">
+    <SafeAreaView className="flex-1">
       <ScrollView showsVerticalScrollIndicator={false}>
 
         {/* Search box */}
@@ -185,7 +185,7 @@ export default function Search() {
                 <Text
                   numberOfLines={1}
                   ellipsizeMode="tail"
-                  className="ml-2 text-[16px] text-gray-400"
+                  className="ml-2 text-[14px] text-gray-400"
                 >
                   Search by area or city
                 </Text>
@@ -193,7 +193,7 @@ export default function Search() {
             </View>
             <TouchableOpacity
               onPress={() => { setServiceFilter("Boarding"); setPetFilter("Dog & Cat") }}
-              className="h-11 mr-6 border rounded-full border-gray-300 py-0 px-4 flex-col justify-center items-center"
+              className="h-11 mr-6 border rounded-[6px] border-gray-300 py-0 px-4 flex-col justify-center items-center"
             >
               <Text className="text-[14px] text-center m-0 p-0">Clear</Text>
             </TouchableOpacity>
@@ -208,7 +208,7 @@ export default function Search() {
             ].map(({ type, icon: Icon }) => (
               <TouchableOpacity
                 key={type}
-                className={`flex-1 border px-3 py-2 rounded border-gray-300 ${serviceFilter === type ? "bg-gray-200" : ""
+                className={`flex-1 border px-3 py-2 rounded-full border-gray-300 ${serviceFilter === type ? "bg-gray-200" : ""
                   }`}
                 onPress={() => setServiceFilter(type as any)}
               >
@@ -229,7 +229,7 @@ export default function Search() {
             ].map(({ label, value, icon: Icon }) => (
               <TouchableOpacity
                 key={label}
-                className={`flex-1 border px-3 py-2 rounded border-gray-300 ${petFilter === (value as any) ? "bg-gray-200" : ""
+                className={`flex-1 border px-3 py-2 rounded-full border-gray-300 ${petFilter === (value as any) ? "bg-gray-200" : ""
                   }`}
                 onPress={() => setPetFilter(value as any)}
               >

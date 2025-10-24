@@ -8,8 +8,8 @@ module.exports = {
       fontFamily: {
         // 👇 Make Bricolage Grotesque your main font
         primary: ["BricolageGrotesque_400Regular"],
-        "primary-medium": ["BricolageGrotesque_500Medium"],
-        "primary-bold": ["BricolageGrotesque_700Bold"],
+        primaryMedium : ["BricolageGrotesque_500Medium"],
+        primaryBold: ["BricolageGrotesque_700Bold"],
       },
       colors:{
         primary:"#ff3e06",

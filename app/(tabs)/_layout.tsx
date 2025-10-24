@@ -16,7 +16,6 @@ export default function TabsLayout(){
           alignItems: 'center',
           justifyContent: 'center',
           flexDirection:'row',
-          height: 70,
           elevation: 0,
           shadowOpacity: 0,
           borderTopWidth: 0,
@@ -74,6 +73,21 @@ export default function TabsLayout(){
               <TabIcon 
                 focused={focused}
                 iconUrl="https://img.icons8.com/ios-glyphs/30/user--v1.png"
+              />
+            ) 
+          }
+        }>
+      </Tabs.Screen>
+      <Tabs.Screen 
+        name="petProfileListScreen" 
+        options={
+          {
+            title:"Manage Account", 
+            headerShown: false,
+            tabBarIcon:({focused})=>(
+              <TabIcon 
+                focused={focused}
+                iconUrl="https://img.icons8.com/glyph-neue/64/FFFFFF/cat-footprint.png"
               />
             ) 
           }

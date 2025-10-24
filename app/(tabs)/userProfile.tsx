@@ -1,34 +1,143 @@
-import { Image, ImageBackground, Text, View } from "react-native";
+import { Link } from "expo-router";
+import { Bell, CalendarDays, ChevronRight, CreditCard, HelpCircle, Home, Languages, PawPrint, Shield, User, UserPlus } from "lucide-react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function UserProfile() {
+export default function userProfile() {
   return (
-    <SafeAreaView className="flex-1 bg-white">
-      {/* Cover Image */}
-      <ImageBackground
-        source={{
-          uri: "https://i.pinimg.com/1200x/d7/37/e7/d737e7dd6cc427e606852cca820c9ea5.jpg",
-        }}
-        className="w-full h-[180px] justify-end items-center"
-        resizeMode="cover"
-      >
-        {/* Profile Image */}
-        <Image
-          source={{
-            uri: "https://i.pinimg.com/564x/b6/26/0b/b6260b8874ea6a74afc3c6c35912fedf.jpg",
-          }}
-          className="w-[120px] h-[120px] rounded-full border-[6px] border-white mb-[-50px]"
-          resizeMode="cover"
-        />
-      </ImageBackground>
+    <SafeAreaView>
+      <View className="px-6 py-6 flex-row items-center justify-between">
+        <Text className="font-primaryBold text-[24px]">Account</Text>
+        {/* Notification bell with badge */}
 
-      {/* User Info */}
-      <View className="mt-[60px] flex-col items-center px-6">
-        <Text className="text-[22px] font-semibold mb-1 text-black">John Doe</Text>
-        <Text className="text-[14px] text-gray-600 mb-[2px]">johndoe@pivotmkg.com</Text>
-        <Text className="text-[14px] text-gray-600">+91 9876543210</Text>
+        <Link href="/notificationScreen" asChild>
+          <TouchableOpacity className="relative w-[40px] h-[40px] p-2">
+            <Bell size={22} color="#111827" />
+            <View className="absolute top-[3px] right-[6px] w-[14px] h-[14px] bg-red-500 rounded-full items-center justify-center">
+              <Text className="text-white text-[9px] font-semibold">3</Text>
+            </View>
+          </TouchableOpacity>
+        </Link>
+
       </View>
-      
+
+      {/* user profile info */}
+      <TouchableOpacity className="flex-row items-center justify-between px-6 py-3 rounded-[12px] border-b border-gray-200">
+        {/* Left side: Avatar + text */}
+        <View className="flex-row items-center gap-3">
+          <Image
+            source={{
+              uri: "https://randomuser.me/api/portraits/men/32.jpg",
+            }}
+            className="w-[48px] h-[48px] rounded-full"
+          />
+
+          <View className="">
+            <Text className="text-[18px] font-semibold text-black mb-1">Sam</Text>
+            <Text className="text-[12px] text-gray-500">Show profile</Text>
+          </View>
+        </View>
+
+        {/* Right arrow */}
+        <ChevronRight size={20} color="#9CA3AF" />
+      </TouchableOpacity>
+
+      {/* Settings List */}
+      <View className="px-2 mt-6 space-y-3">
+        {/* Become a Host */}
+        <TouchableOpacity className="py-2 px-4 flex-row items-center justify-between bg-accent/10 rounded-[10px]">
+          <View className="flex-row items-center gap-2">
+            <Home size={20} color="#f97316" />
+            <Text className="text-lg font-medium text-black">Become a Host</Text>
+          </View>
+          <ChevronRight size={20} color="#a3a3a3" />
+        </TouchableOpacity>
+
+        {/* Pet Profile */}
+        <Link href="/petProfileListScreen">
+          <TouchableOpacity className="py-2 px-4 flex-row items-center justify-between bg-accent/10 rounded-[10px]">
+            <View className="flex-row items-center gap-2">
+              <PawPrint size={20} color="#f97316" />
+              <Text className="text-lg font-medium text-black">Pet Profile</Text>
+            </View>
+            <ChevronRight size={20} color="#a3a3a3" />
+          </TouchableOpacity>
+        </Link>
+
+
+        {/* My Bookings */}
+        <TouchableOpacity className="py-2 px-4 flex-row items-center justify-between bg-accent/10 rounded-[10px]">
+          <View className="flex-row items-center gap-2">
+            <CalendarDays size={20} color="#f97316" />
+            <Text className="text-lg font-medium text-black">My Bookings</Text>
+          </View>
+          <ChevronRight size={20} color="#a3a3a3" />
+        </TouchableOpacity>
+
+        {/* Payment */}
+        <TouchableOpacity className="py-2 px-4 flex-row items-center justify-between bg-accent/10 rounded-[10px]">
+          <View className="flex-row items-center gap-2">
+            <CreditCard size={20} color="#f97316" />
+            <Text className="text-lg font-medium text-black">Payment</Text>
+          </View>
+          <ChevronRight size={20} color="#a3a3a3" />
+        </TouchableOpacity>
+
+        {/* Profile */}
+        <TouchableOpacity className="py-2 px-4 flex-row items-center justify-between bg-accent/10 rounded-[10px]">
+          <View className="flex-row items-center gap-2">
+            <User size={20} color="#f97316" />
+            <Text className="text-lg font-medium text-black">Profile</Text>
+          </View>
+          <ChevronRight size={20} color="#a3a3a3" />
+        </TouchableOpacity>
+
+        {/* Notifications */}
+        <TouchableOpacity className="py-2 px-4 flex-row items-center justify-between bg-accent/10 rounded-[10px]">
+          <View className="flex-row items-center gap-2">
+            <Bell size={20} color="#f97316" />
+            <Text className="text-lg font-medium text-black">Notifications</Text>
+          </View>
+          <ChevronRight size={20} color="#a3a3a3" />
+        </TouchableOpacity>
+
+        {/* Security */}
+        <TouchableOpacity className="py-2 px-4 flex-row items-center justify-between bg-accent/10 rounded-[10px]">
+          <View className="flex-row items-center gap-2">
+            <Shield size={20} color="#f97316" />
+            <Text className="text-lg font-medium text-black">Security</Text>
+          </View>
+          <ChevronRight size={20} color="#a3a3a3" />
+        </TouchableOpacity>
+
+        {/* Language */}
+        <TouchableOpacity className="py-2 px-4 flex-row items-center justify-between bg-accent/10 rounded-[10px]">
+          <View className="flex-row items-center gap-2">
+            <Languages size={20} color="#f97316" />
+            <Text className="text-lg font-medium text-black">Language</Text>
+          </View>
+          <ChevronRight size={20} color="#a3a3a3" />
+        </TouchableOpacity>
+
+        {/* Help Center */}
+        <TouchableOpacity className="py-2 px-4 flex-row items-center justify-between bg-accent/10 rounded-[10px]">
+          <View className="flex-row items-center gap-2">
+            <HelpCircle size={20} color="#f97316" />
+            <Text className="text-lg font-medium text-black">Help Center</Text>
+          </View>
+          <ChevronRight size={20} color="#a3a3a3" />
+        </TouchableOpacity>
+
+        {/* Invite Friends */}
+        <TouchableOpacity className="py-2 px-4 flex-row items-center justify-between bg-accent/10 rounded-[10px]">
+          <View className="flex-row items-center gap-2">
+            <UserPlus size={20} color="#f97316" />
+            <Text className="text-lg font-medium text-black">Invite Friends</Text>
+          </View>
+          <ChevronRight size={20} color="#a3a3a3" />
+        </TouchableOpacity>
+      </View>
+
     </SafeAreaView>
-  );
+  )
 }
